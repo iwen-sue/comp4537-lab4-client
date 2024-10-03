@@ -1,30 +1,29 @@
+import strings from "./lang/en/en.js";
+
 const API_BASE_URL = "https://api.grace-su.com/api/definitions";
 
 function searchWord() {
   const word = document.getElementById("wordInput").value.trim();
   if (!word) {
-    showResult("Please enter a word to search.");
+    showResult(strings.enterWordToSearch);
     return;
   }
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", `${API_BASE_URL}/search`, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.open("GET", `${API_BASE_URL}?word=${encodeURIComponent(word)}`, true);
   xhr.onreadystatechange = function () {
     if (this.readyState === 4) {
       if (this.status === 200) {
         const response = JSON.parse(this.responseText);
-        showResult(
-          `Definition of "${response.searchObj.word}": ${response.searchObj.definition}`
-        );
+        showResult(strings.definitionOf(response.word, response.definition));
       } else if (this.status === 404) {
-        showResult(`Word "${word}" not found in the dictionary.`);
+        showResult(strings.wordNotFound(word));
       } else {
-        showResult("An error occurred while searching for the word.");
+        showResult(strings.searchError);
       }
     }
   };
-  xhr.send(JSON.stringify({ word }));
+  xhr.send();
 }
 
 function addWord() {
@@ -32,7 +31,7 @@ function addWord() {
   const definition = document.getElementById("definitionInput").value.trim();
 
   if (!word || !definition) {
-    showResult("Please enter both a word and its definition.");
+    showResult(strings.enterWordAndDefinition);
     return;
   }
 
@@ -43,14 +42,12 @@ function addWord() {
     if (this.readyState === 4) {
       if (this.status === 200) {
         const response = JSON.parse(this.responseText);
-        showResult(
-          `Word "${response.storedObj.word}" successfully added to the dictionary.`
-        );
+        showResult(strings.wordAdded(response.storedObj.word));
         clearInputs();
       } else if (this.status === 500) {
-        showResult(`Warning! "${word}" already exists in the dictionary.`);
+        showResult(strings.wordExists(word));
       } else {
-        showResult("An error occurred while adding the word.");
+        showResult(strings.addError);
       }
     }
   };
@@ -65,3 +62,7 @@ function clearInputs() {
   document.getElementById("wordInput").value = "";
   document.getElementById("definitionInput").value = "";
 }
+
+// Make functions available globally
+window.searchWord = searchWord;
+window.addWord = addWord;
