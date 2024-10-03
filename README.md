@@ -11,7 +11,7 @@ This repository contains the client-side code for the COMP4537 Lab 4 Dictionary 
 
 The client communicates with the following API endpoints.
 
-* POST https://api.grace-su.com/api/definitions
+* POST https://api.grace-su.com/api/definitions/add
 * GET https://api.grace-su.com/api/definitions?word=<your_search_word>
 
 ### Live Demo
