@@ -4,8 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COMP4537 Lab4 Simple Dictionary</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <h1>Simple Dictionary</h1>
+    <div class="input-group">
+        <input type="text" id="wordInput" placeholder="Enter a word">
+        <button onclick="searchWord()">Search Word</button>
+        <button onclick="addWord()">Add Word</button>
+    </div>
+    <textarea id="definitionInput" placeholder="Enter definition (for adding new words)"></textarea>
+    <div id="result"></div>
+    <script src="app.js"></script>
 </body>
 </html>
