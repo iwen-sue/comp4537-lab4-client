@@ -7,9 +7,7 @@ This repository contains the client-side code for the COMP4537 Lab 4 Dictionary 
 * Search for word definitions
 * Add new words to the dictionary
 
-### API Endpoints
+### Live Demo
 
-This client communicates with the following API endpoints:
+[Dictionary App Demo](https://luludonglab4.netlify.app)
 
-* POST https://api.grace-su.com/api/definitions
-* GET https://api.grace-su.com/api/definitions?word=<your_search_word>
